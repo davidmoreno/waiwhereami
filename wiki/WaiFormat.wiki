@@ -20,7 +20,7 @@ All file positions refer to absolute position at the files.
 32 bit longitude and latitudes as it is:
 
  1. easy to store on 32 bit computers (most).
- 2. enough: I need 180, each  is about 111 km, so I have: 180 * 111(km/) / 2^32 = 0.000004651956260204315, or 0.46 cm of precision. Enough for me and GPS (about 10 cm with Relative Kinematic Positioning)
+ 2. enough: I need 180, each  is about 111 km, so I have: 180dg x 111(km/dg) / 2^32 = 0.000004651956260204315, or 0.46 cm of precision. Enough for me and GPS (about 10 cm with Relative Kinematic Positioning)
 
 All data from http://en.wikipedia.org/wiki/Global_Positioning_System and     http://en.wikipedia.org/wiki/Latitude.
 
