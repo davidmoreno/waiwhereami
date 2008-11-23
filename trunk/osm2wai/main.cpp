@@ -16,6 +16,9 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
+
+#include <sys/stat.h>
+
 #include <QtCore/QCoreApplication>
 #include <QFile>
 #include <QXmlStreamReader>
@@ -28,25 +31,69 @@
 #include "kdnode.h"
 
 void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &ways);
-void filterWays(WayList &wl);
+void filterWays(WayList &wl, char skipme[256]);
 
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
+    QString outputDir="/tmp/";
+    QString osmfile;
+    char skipme[256];
+    memset(skipme, 0, sizeof(skipme));
 
 
-    QStringList args=a.arguments();
-    if (args.count()<=1){
-        qDebug("%s:%d I need an OSM file to convert.",__FILE__,__LINE__);
+    int state=0;
+    foreach(QString arg, a.arguments().mid(1)){
+        if (state==0){
+            if (arg=="--help"){
+                qDebug("%s -- An OSM to WAI converter",argv[0]);
+                qDebug("Usage: %s <maptoconvert> [options]",argv[0]);
+                qDebug("You muse supply just one OSM map to convert");
+                qDebug("\nAvailable options");
+                qDebug("--help                -- shows this help");
+                qDebug("--skip [skip values]  -- skips give way types, must be comma separated numbers, or ranges (ie. 1,2,3,16-24,254)");
+                qDebug("--name [name]         -- name for this map, a directory name. By default /tmp/");
+                exit(1);
+            }
+            else if (arg=="--skip"){
+                state=1;
+            }
+            else if (arg=="--name"){
+                state=2;
+            }
+            else
+                osmfile=arg;
+        }
+        else{
+            if (state==1){
+                foreach(QString n, arg.split(',')){
+                    if (n.contains("-")){
+                        for (int i=n.section("-",0,0).toInt(); i<n.section("-",1,1).toInt(); i++){
+                            skipme[i]=1;
+                        }
+                    }
+                    else
+                        skipme[n.toInt()]=1;
+                }
+            }
+            if (state==2){
+                outputDir=arg;
+            }
+            state=0;
+        }
+    }
+
+    if (osmfile.isEmpty()){
+        qDebug("%s:%d I need at least an OSM file to convert. Use --help to see options.",__FILE__,__LINE__);
         exit(1);
     }
 
-    QString osm(args.at(1));
+    QString osm(osmfile);
     QFile f(osm);
     f.open(QFile::ReadOnly);
     if (f.error()){
-        qDebug("%s:%d Cant open '%s' file. Remember to pass in the OSM file you want to convert",__FILE__,__LINE__,(char*)args.at(1).unicode());
+        qDebug("%s:%d Cant open '%s' file. Remember to pass in the OSM file you want to convert",__FILE__,__LINE__,(char*)osmfile.unicode());
         a.exit(1);
     }
     QXmlStreamReader xml(&f);
@@ -60,7 +107,7 @@ int main(int argc, char *argv[])
     readXML(xml, f, coords, ways);
     qDebug("%s:%d %d ms to load",__FILE__,__LINE__,t.elapsed());
 
-    filterWays(ways);
+    filterWays(ways, skipme);
 
     qDebug("%s:%d %d points",__FILE__,__LINE__,coords.count());
     qDebug("%s:%d %d ways",__FILE__,__LINE__,ways.count());
@@ -76,14 +123,15 @@ int main(int argc, char *argv[])
 
     bool ok;
     t.start();
-    ok=kdtree.save("/tmp/kdtree.bin","/tmp/kddata.bin","/tmp/kdnames.bin");
+    mkdir((char*)outputDir.toUtf8().data(),0777);
+    ok=kdtree.save(QString("%1/kdtree.bin").arg(outputDir),QString("%1/kddata.bin").arg(outputDir),QString("%1/kdnames.bin").arg(outputDir));
     qDebug("%s:%d %d ms to save",__FILE__,__LINE__,t.elapsed());
 
     QRect bbox=kdtree.bounding();
     qDebug("%s:%d Boundingbox is %d,%d %d,%d",__FILE__,__LINE__,bbox.left(),bbox.top(),bbox.width(),bbox.height());
 
     if (ok)
-        qDebug("%s:%d Saved OK",__FILE__,__LINE__);
+        qDebug("%s:%d Saved OK to %s",__FILE__,__LINE__,(char*)outputDir.toUtf8().data());
     else{
         qDebug("%s:%d Error saving!",__FILE__,__LINE__);
         exit(1);
@@ -182,9 +230,9 @@ void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &w
  *
  * Marks as skipable not wanted ways.
  */
-void filterWays(WayList &wl){
+void filterWays(WayList &wl, char skipme[256]){
     foreach(Way *w, wl){
-        if (w->typeId()==254)    w->setSkip(true);
-        //if (w->typeId()<32)   w->setSkip(true);
+        if (skipme[w->typeId()])
+            w->setSkip(true);
     }
 }

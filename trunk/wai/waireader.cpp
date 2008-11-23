@@ -27,6 +27,7 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
 {
     kdtree.setFileName(kdtreefile);
     if (!kdtree.open(QFile::ReadOnly)){
+        qDebug("%s:%d Can open file %s",__FILE__,__LINE__,(char*)kdtreefile.toUtf8().data());
         hasErrors=true;
         return;
     }
@@ -34,6 +35,7 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
 
     kddata.setFileName(datafile);
     if (!kddata.open(QFile::ReadOnly)){
+        qDebug("%s:%d Can open file %s",__FILE__,__LINE__,(char*)datafile.toUtf8().data());
         hasErrors=true;
         return;
     }
@@ -41,6 +43,7 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
 
     kdnames.setFileName(namesfile);
     if (!kdnames.open(QFile::ReadOnly)){
+        qDebug("%s:%d Can open file %s",__FILE__,__LINE__,(char*)namesfile.toUtf8().data());
         hasErrors=true;
         return;
     }

@@ -40,17 +40,18 @@ Way::Way()
 unsigned char Way::typeId(){
     if (typeIdCache)
         return typeIdCache;
+    bool isArea=(coords.first()==coords.last());
     /*
     if (coords.first()==coords.last())
         qDebug("%s:%d closed area! %s",__FILE__,__LINE__,(char*)type.toUtf8().data());
     */
-    if (type=="pedestrian" || type=="footway")
+    if ((type=="pedestrian" || type=="footway") && !isArea)
         typeIdCache=1;
     else if (type=="cycleway")
         typeIdCache=2;
     else if (type=="steps")
         typeIdCache=3;
-    else if (type=="residential")
+    else if (type=="residential" || type=="unclassified" )
         typeIdCache=8+(lanes%8); // simgle road, 1 lane
     else if (type=="road" || type=="secondary" || type=="tertiary" )
         typeIdCache=16+(lanes%4); // 8 is tertiary, + nr lanes.
@@ -68,7 +69,7 @@ unsigned char Way::typeId(){
         typeIdCache=56+(lanes%4);
     else if (type=="landuse-residential")
         typeIdCache=128;
-    else if (type=="landuse-recreation_ground")
+    else if (type=="landuse-recreation_ground" || type=="pedestrian")
         typeIdCache=129;
     else if (type=="leisure-park" || type=="leisure-pitch" || type=="leisure-garden")
         typeIdCache=130;
@@ -82,11 +83,12 @@ unsigned char Way::typeId(){
         typeIdCache=134;
     else if (type=="landuse-military")
         typeIdCache=135;
-    else if (type=="unclassified" || type=="unknown" || type.startsWith("landuser") )
+    else if (type.startsWith("landuse") )
         typeIdCache=254;
     else{
         typeIdCache=255;
-        qDebug("%s:%d unknown type %s",__FILE__,__LINE__,(char*)type.toUtf8().data());
+        if (type!="unknown")
+            qDebug("%s:%d unknown type '%s'",__FILE__,__LINE__,(char*)type.toUtf8().data());
     }
     return typeIdCache;
 }

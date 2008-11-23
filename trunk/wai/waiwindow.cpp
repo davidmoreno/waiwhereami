@@ -25,9 +25,6 @@ WaiWindow::WaiWindow(QWidget *parent, Qt::WFlags flags)
 {
     mapview=new MapView(this);
 
-    if (!mapview->addMap("/tmp/kdtree.bin","/tmp/kddata.bin","/tmp/kdnames.bin")){
-        qDebug("%s:%d error adding map",__FILE__,__LINE__);
-    }
 
     setCentralWidget(mapview);
 }
@@ -36,3 +33,16 @@ WaiWindow::~WaiWindow()
 {
 
 }
+
+/**
+ * @short Makes the map view load the maps at that ubication.
+ *
+ * Can be called several times, and each map will be loaded. The will be drawn in the same order, so you may
+ * pass the layers you want to be bellow the firsts.
+ */
+void WaiWindow::addMap(QString dir){
+    if (!mapview->addMap(QString("%1/kdtree.bin").arg(dir), QString("%1/kddata.bin").arg(dir), QString("%1/kdnames.bin").arg(dir)) ) {
+        qDebug("%s:%d error adding map",__FILE__,__LINE__);
+    }
+}
+

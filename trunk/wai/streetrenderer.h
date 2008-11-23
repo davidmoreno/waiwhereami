@@ -42,6 +42,7 @@ protected:
     char *namesdata;
     MapView *mapView;
     QPainter *painter;
+    bool drawNames;
 
     QSet<int> areasPainted;
     QSet<QString> namesPainted;

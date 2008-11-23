@@ -29,6 +29,8 @@ class WaiWindow : public QMainWindow
 public:
     WaiWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~WaiWindow();
+
+    void addMap(QString dir);
 protected:
     MapView *mapview;
 };

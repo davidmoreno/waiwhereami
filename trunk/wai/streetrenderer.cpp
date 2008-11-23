@@ -27,6 +27,7 @@ StreetRenderer::StreetRenderer(MapView *_mapView, qint32 *_kdmap, unsigned char 
     kdmap=_kdmap;
     mapdata=_mapdata;
     namesdata=_namesdata;
+    drawNames=false;
     srand(time(NULL));
 }
 
@@ -92,6 +93,7 @@ int StreetRenderer::render(unsigned int currentPos){
 
             *ppoints=Q.x();
             *(ppoints+1)=Q.y();
+
             p+=2;
             ppoints+=2;
         }
@@ -102,21 +104,24 @@ int StreetRenderer::render(unsigned int currentPos){
             painter->drawPolygon(poly,Qt::WindingFill);
         }
         else{
-            black.setWidth(mypen.width()+2);
-            painter->setPen(black);
-            painter->drawPolyline(poly);
+            if (wayStyles[type].drawBorder){
+                black.setWidth(mypen.width()+2);
+                painter->setPen(black);
+                painter->drawPolyline(poly);
+            }
             painter->setPen(mypen);
             painter->drawPolyline(poly);
         }
 
-/*
-        name=QString::fromUtf8(&namesdata[nameArea]);
-        if (!namesPainted.contains(name)){
-            painter->setPen(QPen());
-            painter->drawText(poly[poly.count()/2],name);
-            namesPainted.insert(name);
+        if (drawNames){
+            name=QString::fromUtf8(&namesdata[nameArea]);
+            if (!namesPainted.contains(name)){
+                painter->setPen(QPen());
+                painter->drawText(poly[poly.count()/2],name);
+                namesPainted.insert(name);
+            }
         }
-*/
+
         datapos+=6+8*npoints;
     }
     //dpainter->drawPolygon(pointList,nr);
