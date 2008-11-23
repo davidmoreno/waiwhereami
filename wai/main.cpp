@@ -22,6 +22,14 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     WaiWindow w;
+
+    foreach(QString dir, a.arguments().mid(1)){
+        w.addMap(dir);
+    }
+    if (a.arguments().count()==1){
+        w.addMap("/tmp/");
+    }
+
     w.show();
     return a.exec();
 }

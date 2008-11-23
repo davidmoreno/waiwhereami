@@ -35,15 +35,17 @@ MapView::MapView(QWidget *parent):QWidget(parent)
     //worldWindow=QRect(4765996,-393350, 1627,1533);
     //worldWindow=QRect(4152380,-999694,1093378,1465056);
     //worldWindow=QRect(-395223,4759429,13163,15369);
-    worldWindow=QRect(-395223,-4774797,13163,15369);
+    //worldWindow=QRect(-395223,-4774797,13163,15369);
     //worldWindow=QRect(-999694,-5245757,1465056,1093378);
-    worldWindow=QRect(-393350,-4352265,1533,1237);
+    //worldWindow=QRect(-393350,-4352265,1533,1237);
+    worldWindow=QRect(-403222,-4348425,17575,7870);
 }
 
 /**
  * @short Adds a map to the list of known maps.
  */
 bool MapView::addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile){
+    qDebug("%s:%d add map: %s %s %s",__FILE__,__LINE__,(char*)kdtreefile.toUtf8().data(),(char*)datafile.toUtf8().data(),(char*)namesfile.toUtf8().data());
     WaiReader *reader=new WaiReader(kdtreefile, datafile, namesfile, this);
     if (reader->error()){
         delete reader;

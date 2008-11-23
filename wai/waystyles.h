@@ -26,265 +26,266 @@
 struct WayStyles{
     QBrush brush;
     QPen pen;
+    bool drawBorder;
 };
 
 WayStyles wayStyles[256] = {
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 0
-    { QBrush(QColor("#94D248"), Qt::SolidPattern), QPen(QBrush(QColor("#94D248")), 3) }, // 1 pedestrian
-    { QBrush(QColor("#BF4141"), Qt::SolidPattern), QPen(QBrush(QColor("#BF4141")), 3) }, // 2 cycleway
-    { QBrush(QColor("#3333AA"), Qt::SolidPattern), QPen(QBrush(QColor("#3333AA")), 4) }, // 3 steps
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 4
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 5
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 6
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 7
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4) }, // 8 residential +8
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4) }, // 9
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 6) }, // 10
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 6) }, // 11
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 8) }, // 12
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 8) }, // 13
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 10) }, // 14
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 10) }, // 15
-    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 6) }, // 16 tertiary/road
-    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 6) }, // 17
-    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 8) }, // 18
-    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 10) }, // 19
-    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 5) }, // 20 // secondary
-    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 7) }, // 21
-    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 7) }, // 22
-    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 10) }, // 23
-    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 3, Qt::DotLine) }, // 24 train
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 25
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 26
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 27
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 28
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 29
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 30
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 31
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8) }, // 32 Primary, motorways
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8) }, // 33
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10) }, // 34
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10) }, // 35
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12) }, // 36
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12) }, // 37
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15) }, // 38
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15) }, // 39
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3) }, // 40 Service
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3) }, // 41
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3) }, // 42
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4) }, // 43
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4) }, // 44
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5) }, // 45
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5) }, // 46
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5) }, // 47
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 2) }, // 48 Viaduct
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3) }, // 49
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3) }, // 50
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 4) }, // 51
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 4) }, // 52
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5) }, // 53
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5) }, // 54
-    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5) }, // 55
-    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 1) }, // 56  // track
-    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 2) }, // 57
-    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 3) }, // 58
-    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 4) }, // 59
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 60
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 61
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 62
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 63
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 64
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 65
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 66
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 67
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 68
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 69
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 70
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 71
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 72
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 73
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 74
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 75
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 76
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 77
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 78
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 79
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 80
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 81
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 82
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 83
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 84
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 85
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 86
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 87
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 88
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 89
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 90
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 91
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 92
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 93
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 94
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 95
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 96
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 97
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 98
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 99
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 100
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 101
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 102
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 103
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 104
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 105
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 106
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 107
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 108
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 109
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 110
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 111
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 112
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 113
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 114
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 115
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 116
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 117
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 118
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 119
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 120
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 121
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 122
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 123
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 124
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 125
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 126
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1) }, // 127
-    { QBrush(QColor("#CCCCCC"), Qt::SolidPattern), QPen(QBrush(QColor("#CCCCCC")), 1) }, // 128 residential
-    { QBrush(QColor("#7CE612"), Qt::SolidPattern), QPen(QBrush(QColor("#7CE612")), 1) }, // 129 recreation ground
-    { QBrush(QColor("#C5E677"), Qt::SolidPattern), QPen(QBrush(QColor("#C5E677")), 1) }, // 130 park
-    { QBrush(QColor("#E5F697"), Qt::SolidPattern), QPen(QBrush(QColor("#A9E694")), 1) }, // 131 playground
-    { QBrush(QColor("#A9E694"), Qt::SolidPattern), QPen(QBrush(QColor("#BF5BE6")), 1) }, // 132 village green
-    { QBrush(QColor("#BF5BE6"), Qt::SolidPattern), QPen(QBrush(QColor("#773377")), 1) }, // 133 comercial
-    { QBrush(QColor("#333377"), Qt::SolidPattern), QPen(QBrush(QColor("#333377")), 1) }, // 134 industrial
-    { QBrush(QColor("#442222"), Qt::SolidPattern), QPen(QBrush(QColor("#333333")), 1) }, // 135 military
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 136
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 137
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 138
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 139
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 140
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 141
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 142
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 143
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 144
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 145
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 146
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 147
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 148
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 149
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 150
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 151
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 152
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 153
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 154
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 155
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 156
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 157
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 158
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 159
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 160
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 161
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 162
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 163
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 164
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 165
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 166
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 167
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 168
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 169
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 170
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 171
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 172
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 173
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 174
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 175
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 176
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 177
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 178
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 179
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 180
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 181
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 182
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 183
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 184
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 185
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 186
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 187
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 188
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 189
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 190
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 191
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 192
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 193
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 194
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 195
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 196
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 197
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 198
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 199
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 200
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 201
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 202
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 203
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 204
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 205
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 206
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 207
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 208
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 209
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 210
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 211
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 212
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 213
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 214
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 215
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 216
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 217
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 218
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 219
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 220
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 221
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 222
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 223
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 224
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 225
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 226
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 227
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 228
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 229
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 230
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 231
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 232
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 233
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 234
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 235
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 236
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 237
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 238
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 239
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 240
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 241
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 242
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 243
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 244
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 245
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 246
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 247
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 248
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 249
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 250
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 251
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 252
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 253
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1) }, // 254
-    { QBrush(QColor("#FF7777"), Qt::SolidPattern), QPen(QBrush(QColor("#FF7777")), 1) } // 255
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 0
+    { QBrush(QColor("#94D248"), Qt::SolidPattern), QPen(QBrush(QColor("#94D248")), 3), false }, // 1 pedestrian
+    { QBrush(QColor("#BF4141"), Qt::SolidPattern), QPen(QBrush(QColor("#BF4141")), 3), false }, // 2 cycleway
+    { QBrush(QColor("#3333AA"), Qt::SolidPattern), QPen(QBrush(QColor("#3333AA")), 4), false }, // 3 steps
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 4
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 5
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 6
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 7
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4), true }, // 8 residential +8
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4), true }, // 9
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 6), true }, // 10
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 6), true }, // 11
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 8), true }, // 12
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 8), true }, // 13
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 10), true }, // 14
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 10), true }, // 15
+    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 6), false }, // 16 tertiary/road
+    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 6), false }, // 17
+    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 8), false }, // 18
+    { QBrush(QColor("#ECF316"), Qt::SolidPattern), QPen(QBrush(QColor("#ECF316")), 10), false }, // 19
+    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 5), false }, // 20 // secondary
+    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 7), false }, // 21
+    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 7), false }, // 22
+    { QBrush(QColor("#2CD316"), Qt::SolidPattern), QPen(QBrush(QColor("#2CD316")), 10), false }, // 23
+    { QBrush(QColor("#FFFFFF"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 3, Qt::DotLine), true }, // 24 train
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 25
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 26
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 27
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 28
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 29
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 30
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 31
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 32 Primary, motorways
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 33
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 34
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 35
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12), false }, // 36
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12), false }, // 37
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 38
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 39
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 40 Service
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 41
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 42
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4), false }, // 43
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4), false }, // 44
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 45
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 46
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 47
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 2), false }, // 48 Viaduct
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3), false }, // 49
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3), false }, // 50
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 4), false }, // 51
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 4), false }, // 52
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5), false }, // 53
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5), false }, // 54
+    { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 5), false }, // 55
+    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 1), false }, // 56  // track
+    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 2), false }, // 57
+    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 3), false }, // 58
+    { QBrush(QColor("#BF8F15"), Qt::SolidPattern), QPen(QBrush(QColor("#BF8F15")), 4), false }, // 59
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 60
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 61
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 62
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 63
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 64
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 65
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 66
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 67
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 68
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 69
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 70
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 71
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 72
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 73
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 74
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 75
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 76
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 77
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 78
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 79
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 80
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 81
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 82
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 83
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 84
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 85
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 86
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 87
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 88
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 89
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 90
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 91
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 92
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 93
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 94
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 95
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 96
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 97
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 98
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 99
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 100
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 101
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 102
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 103
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 104
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 105
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 106
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 107
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 108
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 109
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 110
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 111
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 112
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 113
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 114
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 115
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 116
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 117
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 118
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 119
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 120
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 121
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 122
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 123
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 124
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 125
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 126
+    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 127
+    { QBrush(QColor("#CCCCCC"), Qt::SolidPattern), QPen(QBrush(QColor("#CCCCCC")), 1), false }, // 128 residential
+    { QBrush(QColor("#7CE612"), Qt::SolidPattern), QPen(QBrush(QColor("#000000")), 1), false }, // 129 recreation ground
+    { QBrush(QColor("#C5E677"), Qt::SolidPattern), QPen(QBrush(QColor("#000000")), 1), false }, // 130 park
+    { QBrush(QColor("#E5F697"), Qt::SolidPattern), QPen(QBrush(QColor("#A9E694")), 1), false }, // 131 playground
+    { QBrush(QColor("#A9E694"), Qt::SolidPattern), QPen(QBrush(QColor("#BF5BE6")), 1), false }, // 132 village green
+    { QBrush(QColor("#BF5BE6"), Qt::SolidPattern), QPen(QBrush(QColor("#773377")), 1), false }, // 133 comercial
+    { QBrush(QColor("#333377"), Qt::SolidPattern), QPen(QBrush(QColor("#333377")), 1), false }, // 134 industrial
+    { QBrush(QColor("#442222"), Qt::SolidPattern), QPen(QBrush(QColor("#333333")), 1), false }, // 135 military
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 136
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 137
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 138
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 139
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 140
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 141
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 142
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 143
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 144
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 145
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 146
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 147
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 148
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 149
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 150
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 151
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 152
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 153
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 154
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 155
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 156
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 157
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 158
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 159
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 160
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 161
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 162
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 163
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 164
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 165
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 166
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 167
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 168
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 169
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 170
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 171
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 172
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 173
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 174
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 175
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 176
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 177
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 178
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 179
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 180
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 181
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 182
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 183
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 184
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 185
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 186
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 187
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 188
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 189
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 190
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 191
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 192
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 193
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 194
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 195
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 196
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 197
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 198
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 199
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 200
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 201
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 202
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 203
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 204
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 205
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 206
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 207
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 208
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 209
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 210
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 211
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 212
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 213
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 214
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 215
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 216
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 217
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 218
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 219
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 220
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 221
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 222
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 223
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 224
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 225
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 226
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 227
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 228
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 229
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 230
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 231
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 232
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 233
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 234
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 235
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 236
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 237
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 238
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 239
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 240
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 241
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 242
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 243
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 244
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 245
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 246
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 247
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 248
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 249
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 250
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 251
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 252
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 253
+    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 254
+    { QBrush(QColor("#FF7777"), Qt::SolidPattern), QPen(QBrush(QColor("#FF7777")), 1), false } // 255
 };
 
 #endif // WAYSTYLES_H

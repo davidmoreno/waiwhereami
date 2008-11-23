@@ -48,7 +48,7 @@
   <variable>buildconfiguration-debug-buildstep0</variable>
   <valuemap type="QVariantMap" >
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-hDPvBeKBEC,guid=05d15a2013454df507cd9bb7491ec361</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-xWp2j7ze7l,guid=bdbe4397ee7c0eee2b8e378f49295dc4</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -67,21 +67,21 @@
     <value type="QString" >PWD=/home/david</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/david/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/david-desktop:/tmp/.ICE-unix/3143</value>
+    <value type="QString" >SESSION_MANAGER=local/david-desktop:/tmp/.ICE-unix/3152</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3080</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-JzHyWv2976/agent.2976</value>
+    <value type="QString" >SSH_AGENT_PID=3088</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-RCQzsI2983/agent.2983</value>
     <value type="QString" >USER=david</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=8437b66d9a1aca98934159004814a9f2-1226752865.709950-1744740391</value>
+    <value type="QString" >XDG_SESSION_COOKIE=8437b66d9a1aca98934159004814a9f2-1227447748.631296-1231141294</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
     <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
    <valuelist key="abstractProcess.arguments" type="QVariantList" >
-    <value type="QString" >/home/david/src/svn/wai/osm2wai/osm2wai.pro</value>
+    <value type="QString" >/home/david/osm/wai/osm2wai/osm2wai.pro</value>
     <value type="QString" >-spec</value>
     <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
     <value type="QString" >-r</value>
@@ -92,15 +92,15 @@
     <value type="QString" >QT*=network</value>
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/qmake</value>
-   <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/david/src/svn/wai/osm2wai</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/david/osm/wai/osm2wai</value>
   </valuemap>
  </data>
  <data>
   <variable>buildconfiguration-debug-buildstep1</variable>
   <valuemap type="QVariantMap" >
    <valuelist key="abstractProcess.Environment" type="QVariantList" >
-    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-hDPvBeKBEC,guid=05d15a2013454df507cd9bb7491ec361</value>
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-xWp2j7ze7l,guid=bdbe4397ee7c0eee2b8e378f49295dc4</value>
     <value type="QString" >DESKTOP_SESSION=kde</value>
     <value type="QString" >DESKTOP_STARTUP_ID=</value>
     <value type="QString" >DISPLAY=:0.0</value>
@@ -119,16 +119,16 @@
     <value type="QString" >PWD=/home/david</value>
     <value type="QString" >QTDIR=/usr</value>
     <value type="QString" >QT_PLUGIN_PATH=/home/david/.kde4/lib/kde4/plugins/:/usr/lib/kde4/plugins/</value>
-    <value type="QString" >SESSION_MANAGER=local/david-desktop:/tmp/.ICE-unix/3143</value>
+    <value type="QString" >SESSION_MANAGER=local/david-desktop:/tmp/.ICE-unix/3152</value>
     <value type="QString" >SHELL=/bin/bash</value>
     <value type="QString" >SHLVL=1</value>
-    <value type="QString" >SSH_AGENT_PID=3080</value>
-    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-JzHyWv2976/agent.2976</value>
+    <value type="QString" >SSH_AGENT_PID=3088</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-RCQzsI2983/agent.2983</value>
     <value type="QString" >USER=david</value>
     <value type="QString" >WINDOWPATH=7</value>
     <value type="QString" >XCURSOR_THEME=Oxygen_Black</value>
     <value type="QString" >XDG_DATA_DIRS=/usr/share:/usr/share:/usr/local/share</value>
-    <value type="QString" >XDG_SESSION_COOKIE=8437b66d9a1aca98934159004814a9f2-1226752865.709950-1744740391</value>
+    <value type="QString" >XDG_SESSION_COOKIE=8437b66d9a1aca98934159004814a9f2-1227447748.631296-1231141294</value>
     <value type="QString" >XDM_MANAGED=method=classic</value>
     <value type="QString" >_=/usr/bin/kdeinit4</value>
    </valuelist>
@@ -138,7 +138,7 @@
    </valuelist>
    <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
    <value key="abstractProcess.enabled" type="bool" >true</value>
-   <value key="abstractProcess.workingDirectory" type="QString" >/home/david/src/svn/wai/osm2wai</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/david/osm/wai/osm2wai</value>
    <valuelist key="makeargs" type="QVariantList" >
     <value type="QString" >debug</value>
    </valuelist>
