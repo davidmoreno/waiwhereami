@@ -10,8 +10,8 @@ TEMPLATE = app
 SOURCES += main.cpp \
     coordinate.cpp \
     kdnode.cpp \
-    ../../../../osm/wai/osm2wai/way.cpp
+    way.cpp
 OTHER_FILES += FORMAT.txt
 HEADERS += coordinate.h \
     kdnode.h \
-    ../../../../osm/wai/osm2wai/way.h
+    way.h
