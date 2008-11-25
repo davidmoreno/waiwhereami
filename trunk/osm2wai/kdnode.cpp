@@ -24,6 +24,8 @@
 #include "kdnode.h"
 #include "way.h"
 
+//#define CHECK_POINT 300023808
+
 int KdNode::boundingBox[4]={0,0,0,0};
 
 KdNode::KdNode(CoordinateList l){

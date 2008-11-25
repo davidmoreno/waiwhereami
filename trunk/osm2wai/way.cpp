@@ -51,15 +51,17 @@ unsigned char Way::typeId(){
         typeIdCache=2;
     else if (type=="steps")
         typeIdCache=3;
-    else if (type=="residential" || type=="unclassified" )
+    else if (type=="footway" || type=="path")
+        typeIdCache=3;
+    else if (type=="residential" || type=="unclassified"  || type=="living_street"  || type=="narrow_gauge" || type=="motorroad")
         typeIdCache=8+(lanes%8); // simgle road, 1 lane
-    else if (type=="road" || type=="secondary" || type=="tertiary" )
+    else if (type=="road" || type=="secondary" || type=="tertiary"  || type=="secondary_link" || type=="tertiary_link" || type=="byway")
         typeIdCache=16+(lanes%4); // 8 is tertiary, + nr lanes.
-    else if (type=="trunk")
+    else if (type=="trunk" || type=="trunk_link")
         typeIdCache=20+(lanes%4);
     else if (type=="light_rail" || type=="rail" || type=="subway" || type=="tram")
         typeIdCache=24;
-    else if (type=="motorway" || type=="motorway_link" || type=="primary")
+    else if (type=="motorway" || type=="motorway_link" || type=="primary" || type=="primary_link" || type=="raceway" || type=="motorway_junction")
         typeIdCache=32+(lanes%8); // 8 is tertiary, + nr lanes.
     else if (type=="service")
         typeIdCache=40+(lanes%8);
@@ -83,6 +85,10 @@ unsigned char Way::typeId(){
         typeIdCache=134;
     else if (type=="landuse-military")
         typeIdCache=135;
+    else if (type=="construction")
+        typeIdCache=136;
+    else if (type=="abandoned")
+        typeIdCache=137;
     else if (type.startsWith("landuse") )
         typeIdCache=254;
     else{

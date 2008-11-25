@@ -44,7 +44,7 @@ public:
     /// Adds a coordinate to the way. Coordinates MUST be inserted in order.
     void addCoordinate(const Coordinate &c){ coords.append(c); }
     CoordinateList getCoordinateList(){ return coords; }
-    void useCoordinate(const Coordinate &c){ coordsOnMap.insert(c.getId()); }
+    void useCoordinate(const Coordinate &c){ foreach(Way *w, c.getWay()){ w->coordsOnMap.insert(c.getId()); } }
 
     bool internalCheck();
 
