@@ -21,10 +21,26 @@
 
 #include <QString>
 #include <QList>
+#include <QSet>
+#include <QExplicitlySharedDataPointer>
+#include <QSharedData>
 
 class Way;
 
 typedef QList<Way*> WayList;
+
+
+/**
+ * @short Privated shared data for the coordinates
+ */
+class CoordinateData : public QSharedData{
+    public:
+        CoordinateData(int id, double lat, double lon):id(id), lat(lat),lon(lon) {  }
+        int id;
+        double lat;
+        double lon;
+        WayList way;
+};
 
 /**
  * @short A GPS coordinate
@@ -32,14 +48,14 @@ typedef QList<Way*> WayList;
 class Coordinate
 {
 public:
-    Coordinate(int id, double lat, double lon):id(id), lat(lat),lon(lon) {  }
+    Coordinate(int id, double lat, double lon): data(new CoordinateData(id, lat,lon)) {  }
 
     QString toString();
 
-    int getId() const { return id; }
+    int getId() const { return data->id; }
     //bool isAtWay(Way *) const;
-    double latitude() const { return lat; }
-    double longitude() const { return lon; }
+    double latitude() const { return data->lat; }
+    double longitude() const { return data->lon; }
 
     int intLongitude();
     int intLatitude();
@@ -50,20 +66,18 @@ public:
     int intMercatorX();
     int intMercatorY();
 
-    void setWay(Way *w);
+    void setWay(Way *w) const;
     WayList getWay() const;
 
-    bool operator==(const Coordinate &other) const { return id==other.id; }
-    bool operator!=(const Coordinate &other) const { return id!=other.id; }
+    bool operator==(const Coordinate &other) const { return data->id==other.data->id; }
+    bool operator!=(const Coordinate &other) const { return data->id!=other.data->id; }
 
 protected:
-    int id;
-    double lat;
-    double lon;
-    WayList way;
+    QExplicitlySharedDataPointer<CoordinateData> data;
 };
 
 typedef QList<Coordinate> CoordinateList;
+typedef QSet<Coordinate> CoordinateSet;
 
 /// Used to order by id
 bool idLessThan(Coordinate &a, Coordinate &b);
@@ -75,6 +89,9 @@ bool latitudeLessThan(Coordinate &a, Coordinate &b);
 bool longitudeLessThan(Coordinate &a, Coordinate &b);
 /// Finds a coordinate by id
 CoordinateList::Iterator findCoordinate(CoordinateList &list, int id);
-
+/// Finds a coordinate by id, on a set
+CoordinateSet::Iterator findCoordinate(CoordinateSet &set, int id);
+/// Hash for coordinates.
+uint qHash(const Coordinate &c);
 
 #endif // COORDINATE_H

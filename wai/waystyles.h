@@ -31,9 +31,9 @@ struct WayStyles{
 
 WayStyles wayStyles[256] = {
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 0
-    { QBrush(QColor("#94D248"), Qt::SolidPattern), QPen(QBrush(QColor("#94D248")), 3), false }, // 1 pedestrian
-    { QBrush(QColor("#BF4141"), Qt::SolidPattern), QPen(QBrush(QColor("#BF4141")), 3), false }, // 2 cycleway
-    { QBrush(QColor("#3333AA"), Qt::SolidPattern), QPen(QBrush(QColor("#3333AA")), 4), false }, // 3 steps
+    { QBrush(QColor("#94D248"), Qt::SolidPattern), QPen(QBrush(QColor("#94D248")), 3, Qt::DotLine), false }, // 1 pedestrian
+    { QBrush(QColor("#BF4141"), Qt::SolidPattern), QPen(QBrush(QColor("#BF4141")), 3, Qt::DotLine), false }, // 2 cycleway
+    { QBrush(QColor("#3333AA"), Qt::SolidPattern), QPen(QBrush(QColor("#3333AA")), 4, Qt::DashLine), false }, // 3 steps
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 4
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 5
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 6

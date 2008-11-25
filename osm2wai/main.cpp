@@ -30,9 +30,9 @@
 #include "coordinate.h"
 #include "kdnode.h"
 
-void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &ways);
+void readXML(QXmlStreamReader &xml, QFile &f, WayList &ways);
 void filterWays(WayList &wl, char skipme[256]);
-
+CoordinateList readCoordinatesFromWays(WayList ways);
 
 int main(int argc, char *argv[])
 {
@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
             if (state==1){
                 foreach(QString n, arg.split(',')){
                     if (n.contains("-")){
-                        for (int i=n.section("-",0,0).toInt(); i<n.section("-",1,1).toInt(); i++){
+                        for (int i=n.section("-",0,0).toInt(); i<n.section("-",1,1).toInt() && i<256; i++){
                             skipme[i]=1;
                         }
                     }
@@ -84,6 +84,8 @@ int main(int argc, char *argv[])
         }
     }
 
+    qDebug("%s:%d Open %s, and save data to %s",__FILE__,__LINE__,(char*)osmfile.toUtf8().data(),(char*)outputDir.toUtf8().data());
+
     if (osmfile.isEmpty()){
         qDebug("%s:%d I need at least an OSM file to convert. Use --help to see options.",__FILE__,__LINE__);
         exit(1);
@@ -93,24 +95,26 @@ int main(int argc, char *argv[])
     QFile f(osm);
     f.open(QFile::ReadOnly);
     if (f.error()){
-        qDebug("%s:%d Cant open '%s' file. Remember to pass in the OSM file you want to convert",__FILE__,__LINE__,(char*)osmfile.unicode());
+        qDebug("%s:%d Cant open '%s' file. Remember to pass in the OSM file you want to convert",__FILE__,__LINE__,(char*)osmfile.toUtf8().data());
         a.exit(1);
     }
     QXmlStreamReader xml(&f);
 
-    CoordinateList coords;
     WayList ways;
 
     QTime t;
 
     t.start();
-    readXML(xml, f, coords, ways);
+    readXML(xml, f, ways);
     qDebug("%s:%d %d ms to load",__FILE__,__LINE__,t.elapsed());
 
     filterWays(ways, skipme);
 
-    qDebug("%s:%d %d points",__FILE__,__LINE__,coords.count());
+    //qDebug("%s:%d %d points",__FILE__,__LINE__,coords.count());
     qDebug("%s:%d %d ways",__FILE__,__LINE__,ways.count());
+
+    CoordinateList coords;
+    coords=readCoordinatesFromWays(ways);
 
     t.start();
     KdNode kdtree(coords);
@@ -153,8 +157,9 @@ int main(int argc, char *argv[])
  *
  * TODO Celan spagetti
  */
-void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &ways){
+void readXML(QXmlStreamReader &xml, QFile &f, WayList &ways){
         QXmlStreamReader::TokenType type;
+    CoordinateSet coordSet;
     int count=0;
     bool isSorted=false;
     int npoints=0;
@@ -165,17 +170,13 @@ void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &w
         if (type==QXmlStreamReader::StartElement){
             if (xml.name()=="node"){
                 //qDebug("%s:%d %s %s",__FILE__,__LINE__,xml.attributes().value("lat").toString().toAscii().data(),xml.attributes().value("lon").toString().toAscii().data());
-                coords.append(Coordinate(xml.attributes().value("id").toString().toDouble(),
+                coordSet.insert(Coordinate(xml.attributes().value("id").toString().toDouble(),
                                          -xml.attributes().value("lat").toString().toDouble(),
                                          xml.attributes().value("lon").toString().toDouble()));
                 isSorted=false;
                 npoints++;
             }
             else if  (xml.name()=="way"){
-                if (!isSorted){
-                    qSort(coords.begin(), coords.end(), idLessThan);
-                    isSorted=true;
-                }
                 type=xml.readNext();
                 int nnodes=0;
                 Way *way=new Way;
@@ -184,9 +185,9 @@ void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &w
                     if (type==QXmlStreamReader::StartElement){
                         if (xml.name()=="nd"){
                             int nd=xml.attributes().value("ref").toString().toDouble();
-                            CoordinateList::Iterator c=findCoordinate(coords,nd);
+                            CoordinateSet::Iterator c=findCoordinate(coordSet,nd);
                             //qDebug("%s:%d new way point: %s",__FILE__,__LINE__,(char*)c->toString().unicode());
-                            if (c==coords.end()){
+                            if (c==coordSet.end()){
                                 qDebug("%s:%d not found coordinate %d!",__FILE__,__LINE__,nd);
                             }
                             else{
@@ -223,6 +224,7 @@ void readXML(QXmlStreamReader &xml, QFile &f, CoordinateList &coords, WayList &w
             qDebug("%s:%d %.2f%%",__FILE__,__LINE__,f.pos()/fsize);
         }
     }
+    qDebug("%s:%d gross point read: %d points",__FILE__,__LINE__,coordSet.count());
 }
 
 /**
@@ -235,4 +237,18 @@ void filterWays(WayList &wl, char skipme[256]){
         if (skipme[w->typeId()])
             w->setSkip(true);
     }
+}
+
+/**
+ * @short Returns the coordinates taht are used on that way list.
+ */
+CoordinateList readCoordinatesFromWays(WayList ways){
+    QSet<Coordinate> set;
+    foreach(Way *w, ways){
+        if (!w->getSkip())
+            foreach(Coordinate c, w->getCoordinateList()){
+                set.insert(c);
+            }
+    }
+    return set.values();
 }

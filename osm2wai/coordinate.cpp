@@ -32,22 +32,22 @@
  */
 QString Coordinate::toString(){
     return QString("%1:%2:%3 %4:%5:%6 ").
-              arg(DEGRESS(lat)).arg(MINUTES(lat)).arg(SECONDS(lat)).
-              arg(DEGRESS(lon)).arg(MINUTES(lon)).arg(SECONDS(lon));
+              arg(DEGRESS(data->lat)).arg(MINUTES(data->lat)).arg(SECONDS(data->lat)).
+              arg(DEGRESS(data->lon)).arg(MINUTES(data->lon)).arg(SECONDS(data->lon));
 }
 
 /**
  * @short Returns the latitude as an int, with mercantor proyection.
  */
 int Coordinate::intLatitude(){
-    return ((lat/180.0)/111.0)*0x7FFFFFFF;
+    return ((data->lat/180.0)/111.0)*0x7FFFFFFF;
 }
 
 /**
  * @short Returns the longitude as an int, with mercantor proyection.
  */
 int Coordinate::intLongitude(){
-    return ((lon/180.0)/111.0)*0x7FFFFFFF;
+    return ((data->lon/180.0)/111.0)*0x7FFFFFFF;
 }
 
 
@@ -57,7 +57,7 @@ int Coordinate::intLongitude(){
  * http://en.wikipedia.org/wiki/Mercator_projection
  */
 double Coordinate::mercatorX(){
-    return lon;
+    return data->lon;
 }
 /**
  * @short Y using mercator projection
@@ -65,7 +65,7 @@ double Coordinate::mercatorX(){
  * http://en.wikipedia.org/wiki/Mercator_projection
  */
 double Coordinate::mercatorY(){
-    double l=lat*M_PI/180.0;
+    double l=data->lat*M_PI/180.0;
     return log(tan(l)+(1.0/cos(l)))*180.0/M_PI;
 }
 
@@ -89,9 +89,11 @@ int Coordinate::intMercatorY(){
 
 /**
  * @short Sets the map
+ *
+ * const is nt real! I don't know why, if not const at main.cpp it does not compile an iterator.
  */
-void Coordinate::setWay(Way *w){
-    way.append(w);
+void Coordinate::setWay(Way *w) const{
+    data->way.append(w);
 }
 /*
 bool Coordinate::isAtWay(Way *w) const{
@@ -99,7 +101,7 @@ bool Coordinate::isAtWay(Way *w) const{
 }
 */
 WayList Coordinate::getWay() const{
-    return way;
+    return data->way;
 }
 
 /// Used to order by id
@@ -121,6 +123,13 @@ bool longitudeLessThan(Coordinate &a, Coordinate &b){
     return a.longitude()<b.longitude();
 }
 
+
+/**
+ * @short Hash value for coordinates.
+ */
+uint qHash(const Coordinate &c){
+    return qHash(c.getId());
+}
 
 /**
  * @short Searchs a coordinate by id, and returns the reference.
@@ -160,3 +169,11 @@ CoordinateList::Iterator findCoordinate(CoordinateList &list, int id){
 }
 
 
+/**
+ * @short Searchs a coordinate by id, and returns the reference, o a set
+ *
+ */
+CoordinateSet::Iterator findCoordinate(CoordinateSet &set, int id){
+    Coordinate c(id,0,0);
+    return set.find(c);
+}
