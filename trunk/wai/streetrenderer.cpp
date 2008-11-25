@@ -57,7 +57,7 @@ int StreetRenderer::render(unsigned int currentPos){
     //qDebug("%s:%d %d segments",__FILE__,__LINE__,nsegments);
     datapos++;
 
-    QPen black("#000000");
+    QPen black("#777777");
 
     QString name;
     unsigned char npoints;
@@ -72,6 +72,7 @@ int StreetRenderer::render(unsigned int currentPos){
         type=mapdata[datapos+1];
         nameArea=*((qint32*)(&mapdata[datapos+2]));
 
+        
         if (type>127 && areasPainted.contains(nameArea)){
             datapos+=6+8*npoints;
             continue;

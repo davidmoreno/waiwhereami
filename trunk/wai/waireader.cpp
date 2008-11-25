@@ -75,7 +75,7 @@ int WaiReader::drawObjectsInside(QPainter *painter, const QRect &r){
     dpainter=painter;
     drect=r;
 
-    qDebug("%s:%d    draw (%d,%d) to (%d,%d)",__FILE__,__LINE__,r.left(), r.top(), r.right(), r.bottom());
+    //qDebug("%s:%d    draw (%d,%d) to (%d,%d)",__FILE__,__LINE__,r.left(), r.top(), r.right(), r.bottom());
 
     renderer->setPainter(painter);
 
