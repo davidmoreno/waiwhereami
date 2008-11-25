@@ -31,7 +31,7 @@ typedef signed int int32;
 class WaiReader
 {
 public:
-    WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, MapView *parent);
+    WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int min, int max, MapView *parent);
     ~WaiReader();
 
     //QList<QPoint> getPointsInside(const QRect &);
@@ -55,6 +55,9 @@ protected:
     char *namesdata;
     MapView *mapview;
     StreetRenderer *renderer;
+    // min and max zoom ranges for this reader, 0 is off.
+    int min, max;
+
 
     /// @{ @name current drawing, not thread safe
     QRect drect;

@@ -62,7 +62,7 @@ WayStyles wayStyles[256] = {
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 29
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 30
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 31
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 32 Primary, motorways
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 32 Primary, motorways -- nomore, moved to 100
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 33
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 34
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 35
@@ -70,14 +70,14 @@ WayStyles wayStyles[256] = {
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12), false }, // 37
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 38
     { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 39
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 40 Service
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 41
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 3), false }, // 42
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4), false }, // 43
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 4), false }, // 44
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 45
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 46
-    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 5), false }, // 47
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 3), true }, // 40 Service
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 3), true }, // 41
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 3), true }, // 42
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4), true }, // 43
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 4), true }, // 44
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 5), true }, // 45
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 5), true }, // 46
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#FFFFFF")), 5), true }, // 47
     { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 2), false }, // 48 Viaduct
     { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3), false }, // 49
     { QBrush(QColor("#7777AA"), Qt::SolidPattern), QPen(QBrush(QColor("#7777AA")), 3), false }, // 50
@@ -130,14 +130,14 @@ WayStyles wayStyles[256] = {
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 97
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 98
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 99
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 100
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 101
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 102
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 103
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 104
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 105
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 106
-    { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 107
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 100 Primary, motorways
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 8), false }, // 101
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 102
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 10), false }, // 103
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12), false }, // 104
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 12), false }, // 105
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 106
+    { QBrush(QColor("#1251C5"), Qt::SolidPattern), QPen(QBrush(QColor("#1251C5")), 15), false }, // 107
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 108
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 109
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 110
@@ -158,7 +158,7 @@ WayStyles wayStyles[256] = {
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 125
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 126
     { QBrush(QColor("#773333"), Qt::SolidPattern), QPen(QBrush(QColor("#773333")), 1), false }, // 127
-    { QBrush(QColor("#CCCCCC"), Qt::SolidPattern), QPen(QBrush(QColor("#CCCCCC")), 1), false }, // 128 residential
+    { QBrush(QColor("#CCAAAA"), Qt::SolidPattern), QPen(QBrush(QColor("#CCAAAA")), 1), false }, // 128 unknown
     { QBrush(QColor("#7CE612"), Qt::SolidPattern), QPen(QBrush(QColor("#000000")), 1), false }, // 129 recreation ground
     { QBrush(QColor("#C5E677"), Qt::SolidPattern), QPen(QBrush(QColor("#000000")), 1), false }, // 130 park
     { QBrush(QColor("#E5F697"), Qt::SolidPattern), QPen(QBrush(QColor("#A9E694")), 1), false }, // 131 playground
@@ -283,8 +283,8 @@ WayStyles wayStyles[256] = {
     { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 250
     { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 251
     { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 252
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 253
-    { QBrush(QColor("#777777"), Qt::SolidPattern), QPen(QBrush(QColor("#777777")), 1), false }, // 254
+    { QBrush(QColor("#779977"), Qt::SolidPattern), QPen(QBrush(QColor("#779977")), 1), false }, // 253 other landuse
+    { QBrush(QColor("#CCCCCC"), Qt::SolidPattern), QPen(QBrush(QColor("#CCCCCC")), 1), false }, // 254 residential
     { QBrush(QColor("#FF7777"), Qt::SolidPattern), QPen(QBrush(QColor("#FF7777")), 1), false } // 255
 };
 

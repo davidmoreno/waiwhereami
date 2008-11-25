@@ -31,13 +31,14 @@ class MapView : public QWidget
 public:
     MapView(QWidget *parent=NULL);
 
-    bool addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile);
+    bool addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int min, int max);
 
     QPoint window2world(const QPoint &) const;
     QPoint world2window(const QPoint &) const;
 
     QRect window2world(const QRect &) const;
     QRect world2window(const QRect &) const;
+    QSize worldWindowSize() const{ return worldWindow.size(); }
 
     QSizeF window2meters(const QSize &) const;
 
@@ -54,8 +55,6 @@ protected:
     QList<WaiReader*> maps;
 
     QPoint lastMouseMovePosition;
-
-
 };
 
 #endif // MAPVIEW_H

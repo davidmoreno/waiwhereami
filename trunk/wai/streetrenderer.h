@@ -43,6 +43,8 @@ protected:
     MapView *mapView;
     QPainter *painter;
     bool drawNames;
+    // Zoom ranges allowed, 0 is off.
+    int min, max;
 
     QSet<int> areasPainted;
     QSet<QString> namesPainted;

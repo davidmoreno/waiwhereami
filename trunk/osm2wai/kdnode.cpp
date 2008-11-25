@@ -290,7 +290,7 @@ CoordinateList KdNode::getCoordinatesAtWay(const CoordinateList &coords, Way *wa
     while (I!=endI && J!=endJ){
         //printf("I %g J %g lc %d == %d %d %d\n",I->latitude(), J->latitude(), lastCopied, I->getId(),J->getId(),I->getId()==J->getId());
         if (PrevJ!=endJ && (*I)==(*PrevJ)){
-            qDebug("%s:%d ein!?? I skipped this?? %d",__FILE__,__LINE__,way->getId());
+            //qDebug("%s:%d ein!?? I skipped this?? %d",__FILE__,__LINE__,way->getId());
             ++I;
             continue; // go back to begining...
         }

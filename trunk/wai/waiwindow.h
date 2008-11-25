@@ -30,7 +30,7 @@ public:
     WaiWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
     ~WaiWindow();
 
-    void addMap(QString dir);
+    void addMap(QString dir, int min=0, int max=0);
 protected:
     MapView *mapview;
 };

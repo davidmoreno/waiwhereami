@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     coordinate.cpp \
     kdnode.cpp \
     way.cpp
-OTHER_FILES += FORMAT.txt
+OTHER_FILES += FORMAT.txt \
+    preparemaps.sh
 HEADERS += coordinate.h \
     kdnode.h \
     way.h
