@@ -23,11 +23,14 @@
 #include "mapview.h"
 #include "streetrenderer.h"
 
-WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, MapView *parent) : mapview(parent)
+WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int _min, int _max, MapView *parent) : mapview(parent)
 {
+    min=_min;
+    max=_max;
+
     kdtree.setFileName(kdtreefile);
     if (!kdtree.open(QFile::ReadOnly)){
-        qDebug("%s:%d Can open file %s",__FILE__,__LINE__,(char*)kdtreefile.toUtf8().data());
+        qDebug("%s:%d Cant open file %s",__FILE__,__LINE__,(char*)kdtreefile.toUtf8().data());
         hasErrors=true;
         return;
     }
@@ -72,6 +75,10 @@ WaiReader::~WaiReader(){
  * Returns the informative number of points drawn.
  */
 int WaiReader::drawObjectsInside(QPainter *painter, const QRect &r){
+    if ((min && mapview->worldWindowSize().width()<min) || (max && mapview->worldWindowSize().width()>max))
+        return 0;
+
+
     dpainter=painter;
     drect=r;
 

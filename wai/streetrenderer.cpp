@@ -73,12 +73,14 @@ int StreetRenderer::render(unsigned int currentPos){
         nameArea=*((qint32*)(&mapdata[datapos+2]));
 
         
-        if (type>127 && areasPainted.contains(nameArea)){
+        if ((type>127 && areasPainted.contains(nameArea))) {
             datapos+=6+8*npoints;
             continue;
         }
         else
             areasPainted.insert(nameArea);
+
+
 
         mypen=wayStyles[type].pen;
         painter->setBrush(wayStyles[type].brush);

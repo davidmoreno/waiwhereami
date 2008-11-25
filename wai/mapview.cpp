@@ -44,9 +44,9 @@ MapView::MapView(QWidget *parent):QWidget(parent)
 /**
  * @short Adds a map to the list of known maps.
  */
-bool MapView::addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile){
+bool MapView::addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int min, int max){
     qDebug("%s:%d add map: %s %s %s",__FILE__,__LINE__,(char*)kdtreefile.toUtf8().data(),(char*)datafile.toUtf8().data(),(char*)namesfile.toUtf8().data());
-    WaiReader *reader=new WaiReader(kdtreefile, datafile, namesfile, this);
+    WaiReader *reader=new WaiReader(kdtreefile, datafile, namesfile, min, max, this);
     if (reader->error()){
         delete reader;
         return false;
@@ -168,6 +168,8 @@ void MapView::wheelEvent ( QWheelEvent * event ){
  * TODO: Benchmark real work usage changing WaiReader/rects loop nesting.
  */
 void MapView::paintEvent(QPaintEvent *paintEvent){
+
+    // Only draws when whitin this layer range
     QPainter painter(this);
     //painter.setRenderHint(QPainter::Antialiasing);
 
@@ -186,7 +188,7 @@ void MapView::paintEvent(QPaintEvent *paintEvent){
     painter.setPen(QPen());
     painter.drawText(QPoint(10,10), tr("Drawn %1 objects (%2 ms)").arg(totaldrawn).arg(t.elapsed()));
 
-    QSizeF s=window2meters(size());
+    QSizeF s=worldWindow.size();
     painter.drawText(QPoint(10,height()-10), tr("Scale: %1x%2").arg(s.width()).arg(s.height()));
 
 
