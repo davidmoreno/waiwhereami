@@ -24,8 +24,6 @@
 #include "kdnode.h"
 #include "way.h"
 
-#define CHECK_POINT 221288919
-
 int KdNode::boundingBox[4]={0,0,0,0};
 
 KdNode::KdNode(CoordinateList l){
@@ -53,8 +51,6 @@ void KdNode::prepareNode(CoordinateList::Iterator begin, CoordinateList::Iterato
 
         // Dirty way to copy a sublist...
         while(begin!=end){
-            if (begin->getId()==CHECK_POINT)
-                qDebug("%s:%d added check point",__FILE__,__LINE__);
             list.append(*begin);
             ++begin;
         }
@@ -228,8 +224,6 @@ void KdNode::saveData(QFile &data, QFile &nameData){
 
         foreach(Coordinate cc, coordinateListReal){
             way->useCoordinate(cc);
-            if (cc.getId()==CHECK_POINT)
-                qDebug("%s:%d added to datafile, way %d",__FILE__,__LINE__,way->getId());
             cpx=cc.intLongitude();
             cpy=cc.intLatitude();
             // Serialize points.
@@ -272,28 +266,17 @@ CoordinateList KdNode::getCoordinatesAtWay(const CoordinateList &coords, Way *wa
     //qDebug("%s:%d prepare coord list for this way %d, up to %d",__FILE__,__LINE__, lastWayId, wayCoords.count());
     CoordinateList coordinateListReal;
     CoordinateList wayCoords=way->getCoordinateList();
-    bool printcoords=false;
 
     //printCoordinateList("coords",coords);
 
     CoordinateList orderedCoords;
     foreach(Coordinate wc, way->getCoordinateList()){
-        if (wc.getId()==CHECK_POINT){
-            qDebug("%s:%d it is at way %d, it is %g",__FILE__,__LINE__,way->getId(),wc.latitude());
-            printcoords=true;
-        }
         foreach(Coordinate c, coords){
             if (c==wc){
                 orderedCoords.append(wc);
             }
         }
     }
-    if (printcoords) printCoordinateList("orderedCoords",orderedCoords);
-
-
-    if (printcoords) printCoordinateList("coordinate list way",wayCoords);
-
-
     CoordinateList::Iterator I=orderedCoords.begin(), endI=orderedCoords.end();
     CoordinateList::Iterator J=wayCoords.begin(), endJ=wayCoords.end();
 
@@ -337,8 +320,6 @@ CoordinateList KdNode::getCoordinatesAtWay(const CoordinateList &coords, Way *wa
         coordinateListReal.append(*J);
     }
     Q_ASSERT(I==endI);
-
-    if (printcoords) printCoordinateList("real",coordinateListReal);
 
     return coordinateListReal;
 }
