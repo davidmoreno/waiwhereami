@@ -39,6 +39,8 @@ public:
     QRect window2world(const QRect &) const;
     QRect world2window(const QRect &) const;
 
+    QSizeF window2meters(const QSize &) const;
+
 protected:
     void paintEvent(QPaintEvent *paint);
     void mouseMoveEvent(QMouseEvent * event);

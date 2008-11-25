@@ -37,8 +37,8 @@ MapView::MapView(QWidget *parent):QWidget(parent)
     //worldWindow=QRect(-395223,4759429,13163,15369);
     //worldWindow=QRect(-395223,-4774797,13163,15369);
     //worldWindow=QRect(-999694,-5245757,1465056,1093378);
-    //worldWindow=QRect(-393350,-4352265,1533,1237);
-    worldWindow=QRect(-403222,-4348425,17575,7870);
+    worldWindow=QRect(-393350,-4352265,1533,1237);
+    //worldWindow=QRect(-403222,-4348425,17575,7870);
 }
 
 /**
@@ -94,6 +94,18 @@ QRect MapView::window2world(const QRect &r) const{
 QRect MapView::world2window(const QRect &r) const{
     return QRect(world2window(r.topLeft()), world2window(r.bottomRight()));
 }
+
+/**
+ * @short Converts from window coordinates, to meters
+ */
+QSizeF MapView::window2meters(const QSize &s) const{
+    double w=(double(s.width())/width())*(worldWindow.width());
+    w=(w*111.0*180)/(0x7FFFFFFF/100);
+    double h=(double(s.height())/height())*(worldWindow.height());
+    h=(h*111.0*180)/(0x7FFFFFFF/100);
+    return QSizeF(w,h);
+}
+
 
 /**
  * @short Grabs mouse movements to move the map.
@@ -171,5 +183,11 @@ void MapView::paintEvent(QPaintEvent *paintEvent){
             totaldrawn+=map->drawObjectsInside(&painter, wrect);
         }
     }
-    qDebug("%s:%d Drawn %d objects (%d ms)",__FILE__,__LINE__,totaldrawn,t.elapsed());
+    painter.setPen(QPen());
+    painter.drawText(QPoint(10,10), tr("Drawn %1 objects (%2 ms)").arg(totaldrawn).arg(t.elapsed()));
+
+    QSizeF s=window2meters(size());
+    painter.drawText(QPoint(10,height()-10), tr("Scale: %1x%2").arg(s.width()).arg(s.height()));
+
+
 }
