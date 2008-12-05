@@ -27,6 +27,7 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
 {
     min=_min;
     max=_max;
+    renderer=NULL; // should be something, but an error may ocurr.
 
     kdtree.setFileName(kdtreefile);
     if (!kdtree.open(QFile::ReadOnly)){
@@ -34,7 +35,7 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
         hasErrors=true;
         return;
     }
-    kdmap=(int32*)kdtree.map(0,kdtree.size());
+    kdmap=(qint32*)kdtree.map(0,kdtree.size());
 
     kddata.setFileName(datafile);
     if (!kddata.open(QFile::ReadOnly)){
@@ -58,7 +59,8 @@ WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const Q
 }
 
 WaiReader::~WaiReader(){
-    delete renderer;
+    if (renderer)
+        delete renderer;
 }
 
 
@@ -105,11 +107,11 @@ int WaiReader::drawObjectsInside(QPainter *painter, const QRect &r){
  *
  * Returns the informative number of points drawn.
  */
-int WaiReader::drawObjectsInsideRecursive(int32 currentPos, bool atLat, const QRect &worldRect){
+int WaiReader::drawObjectsInsideRecursive(quint32 currentPos, bool atLat, const QRect &worldRect){
 
     //static QPoint pointList[256];
     bool less, more;
-    qint32 current=kdmap[currentPos];
+    long current=kdmap[currentPos];
     if (current){ // Must continue looking inside, not a leaf node
         if (atLat){
             less=current>=drect.top();
@@ -165,4 +167,44 @@ int WaiReader::drawObjectsInsideRecursive(int32 currentPos, bool atLat, const QR
         //dpainter->setClipRect(r);
         return renderer->render(currentPos);
     }
+}
+
+/**
+ * @short Finds a way that passes close to that point.
+ */
+WayInfo WaiReader::findWay(const QPoint &p){
+    quint32 namepos=findArea(p);
+    qDebug("%s:%d found at area %d",__FILE__,__LINE__,namepos);
+
+
+    return WayInfo();
+}
+
+/**
+ * @short Returns the kddata offset for the given point
+ */
+quint32 WaiReader::findArea(const QPoint &p){
+    return findAreaRecursive(0,true, p);
+}
+
+/**
+ * @short Returns the kddata offset for a given point.
+ *
+ * Real worker
+ *
+ * @see WayInfo WaiReader::findWay(const QPoint &p);
+ */
+quint32 WaiReader::findAreaRecursive(unsigned int mapPos, bool atLat, const QPoint &p){
+    long current=kdmap[mapPos];
+    if (current){
+        bool more;
+        if (atLat)
+            more=(p.y()>=current);
+        else
+            more=(p.x()>=current);
+        qDebug("%s:%d now look at %d",__FILE__,__LINE__,mapPos+1+more);
+        return findAreaRecursive(kdmap[mapPos+1+more]>>2, !atLat, p);
+    }
+    else
+        return kdmap[mapPos+1];
 }

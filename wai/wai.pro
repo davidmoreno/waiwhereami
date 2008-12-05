@@ -7,10 +7,12 @@ SOURCES += main.cpp \
     waiwindow.cpp \
     waireader.cpp \
     mapview.cpp \
-    streetrenderer.cpp
+    streetrenderer.cpp \
+    wayinfo.cpp
 HEADERS += waiwindow.h \
     waireader.h \
     mapview.h \
     waystyles.h \
-    streetrenderer.h
+    streetrenderer.h \
+    wayinfo.h
 FORMS += 

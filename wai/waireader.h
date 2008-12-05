@@ -22,11 +22,11 @@
 #include <QRect>
 #include <QFile>
 
+#include "wayinfo.h"
+
 class MapView;
 class QPainter;
 class StreetRenderer;
-
-typedef signed int int32;
 
 class WaiReader
 {
@@ -34,14 +34,18 @@ public:
     WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int min, int max, MapView *parent);
     ~WaiReader();
 
+    WayInfo findWay(const QPoint &p);
+    quint32 findArea(const QPoint &p);
+
     //QList<QPoint> getPointsInside(const QRect &);
     int drawObjectsInside(QPainter *painter, const QRect &r);
-    int drawObjectsInsideRecursive(int32 mapPos, bool atLat, const QRect &sr);
 
     bool error(){ return hasErrors; }
 protected:
 
     void setPenAndBrush(QPainter *painter, unsigned char type);
+    int drawObjectsInsideRecursive(quint32 mapPos, bool atLat, const QRect &sr);
+    quint32 findAreaRecursive(unsigned int mapPos, bool atLat, const QPoint &p);
 
 
 protected:
@@ -50,7 +54,7 @@ protected:
     QFile kdtree;
     QFile kddata;
     QFile kdnames;
-    int32 *kdmap;
+    qint32 *kdmap;
     unsigned char *mapdata;
     char *namesdata;
     MapView *mapview;
