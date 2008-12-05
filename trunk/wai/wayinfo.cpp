@@ -15,28 +15,26 @@
   * You should have received a copy of the GNU General Public License
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
-#ifndef WAIWINDOW_H
-#define WAIWINDOW_H
 
-#include <QtGui/QMainWindow>
+#include <QObject>
 
-class MapView;
+#include "wayinfo.h"
 
-class WaiWindow : public QMainWindow
+WayInfo::WayInfo()
 {
-    Q_OBJECT
+    pointCount=0;
+}
 
-public:
-    WaiWindow(QWidget *parent = 0, Qt::WFlags flags = 0);
-    ~WaiWindow();
+/**
+ * @short Fast initialize values
+ */
+WayInfo::WayInfo(const QString &_name, unsigned char _type) : name(_name), type(_type){
+    pointCount=0;
+}
 
-    void addMap(QString dir, int min=0, int max=0);
-
-public slots:
-    void showInfoAt(const QPoint &);
-
-protected:
-    MapView *mapview;
-};
-
-#endif // WAIWINDOW_H
+/**
+ * @short Returns way type description by the typeid
+ */
+QString WayInfo::typeDescription(){
+    return QObject::tr("Unknown");
+}

@@ -21,6 +21,8 @@
 #include <QWidget>
 #include <QList>
 
+#include "wayinfo.h"
+
 class WaiReader;
 
 /**
@@ -28,11 +30,15 @@ class WaiReader;
  */
 class MapView : public QWidget
 {
+    Q_OBJECT
 public:
     MapView(QWidget *parent=NULL);
 
     bool addMap(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int min, int max);
 
+    WayInfo getWayInfoAt(const QPoint &);
+
+    /// @{ @name Window<->world<->meters conversion routines
     QPoint window2world(const QPoint &) const;
     QPoint world2window(const QPoint &) const;
 
@@ -41,6 +47,11 @@ public:
     QSize worldWindowSize() const{ return worldWindow.size(); }
 
     QSizeF window2meters(const QSize &) const;
+    /// @}
+
+signals:
+    /// Clicked at that world position
+    void clicked(const QPoint &);
 
 protected:
     void paintEvent(QPaintEvent *paint);
@@ -49,12 +60,16 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void wheelEvent ( QWheelEvent * event );
 
+    /// Rect for the data that is shown at this widget.
     QRect worldWindow;
 
     /// Maps known by this mapview.
     QList<WaiReader*> maps;
 
+    /// Position for the last mouse press/move, to move the map
     QPoint lastMouseMovePosition;
+    /// True at release time if there was a movement
+    bool lastMousePressWasMovement;
 };
 
 #endif // MAPVIEW_H

@@ -16,6 +16,8 @@
   * along with this program.  If not, see <http://www.gnu.org/licenses/>.
   */
 
+#include <QMessageBox>
+
 #include "waiwindow.h"
 #include "mapview.h"
 #include "waireader.h"
@@ -26,6 +28,8 @@ WaiWindow::WaiWindow(QWidget *parent, Qt::WFlags flags)
 {
     mapview=new MapView(this);
 
+    connect(mapview,SIGNAL(clicked(const QPoint &)),
+            this,   SLOT(showInfoAt(const QPoint &)));
 
     setCentralWidget(mapview);
 }
@@ -47,5 +51,24 @@ void WaiWindow::addMap(QString dir, int min, int max){
         qDebug("%s:%d error adding map",__FILE__,__LINE__);
         return;
     }
+}
+
+/**
+ * @short Shows information at that point.
+ *
+ * It gets the point (should be segment) closer to that point, and
+ * shows all relevant information known.
+ */
+void WaiWindow::showInfoAt(const QPoint &p){
+    qDebug("%s:%d get info at point %d,%d",__FILE__,__LINE__,p.x(),p.y());
+
+    WayInfo info=mapview->getWayInfoAt(p);
+
+    QMessageBox::information(this, tr("Way information"),
+                             tr("<h1>%1</h1>\n"
+                                "<h2>%2</h2>\n"
+                                "%3 points").arg(info.name).
+                                             arg(info.typeDescription()).
+                                             arg(info.pointCount));
 }
 

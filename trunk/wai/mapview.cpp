@@ -21,6 +21,7 @@
 #include <QPainter>
 #include <QPaintEvent>
 #include <QTime>
+#include <QMessageBox>
 
 #include "mapview.h"
 #include "waireader.h"
@@ -111,6 +112,9 @@ QSizeF MapView::window2meters(const QSize &s) const{
  * @short Grabs mouse movements to move the map.
  */
 void MapView::mouseMoveEvent(QMouseEvent * event){
+    if (!lastMousePressWasMovement)
+        setCursor(Qt::SizeAllCursor);
+
     QPoint np=event->pos();
 
     QPoint nn=lastMouseMovePosition-np;
@@ -119,6 +123,7 @@ void MapView::mouseMoveEvent(QMouseEvent * event){
               nn.y()*worldWindow.height()/height());
     //qDebug("%s:%d move %d %d",__FILE__,__LINE__,nn.x(), nn.y());
     worldWindow.translate(nn);
+    lastMousePressWasMovement=true;
 
     lastMouseMovePosition=np;
     update();
@@ -129,7 +134,7 @@ void MapView::mouseMoveEvent(QMouseEvent * event){
  */
 void MapView::mousePressEvent(QMouseEvent * event){
     lastMouseMovePosition=event->pos();
-    setCursor(Qt::SizeAllCursor);
+    lastMousePressWasMovement=false;
 }
 
 /**
@@ -138,6 +143,10 @@ void MapView::mousePressEvent(QMouseEvent * event){
 void MapView::mouseReleaseEvent(QMouseEvent * event){
     lastMouseMovePosition=event->pos();
     setCursor(Qt::ArrowCursor);
+
+    if (!lastMousePressWasMovement){
+        emit clicked(window2world(lastMouseMovePosition));
+    }
 }
 
 /**
@@ -160,6 +169,20 @@ void MapView::wheelEvent ( QWheelEvent * event ){
     worldWindow.moveTo(dif);
 
     update();
+}
+
+
+/**
+ * @short Returns info about the way closest to that point (using layer info).
+ */
+WayInfo MapView::getWayInfoAt(const QPoint &p){
+    WayInfo wi;
+    foreach(WaiReader *map, maps){
+        wi=map->findWay(p);
+        if (!wi.name.isEmpty())
+            return wi;
+    }
+    return wi; // closest? Not, just one of them
 }
 
 /**
@@ -190,6 +213,4 @@ void MapView::paintEvent(QPaintEvent *paintEvent){
 
     QSizeF s=worldWindow.size();
     painter.drawText(QPoint(10,height()-10), tr("Scale: %1x%2").arg(s.width()).arg(s.height()));
-
-
 }
