@@ -46,6 +46,7 @@ protected:
     void setPenAndBrush(QPainter *painter, unsigned char type);
     int drawObjectsInsideRecursive(quint32 mapPos, bool atLat, const QRect &sr);
     quint32 findAreaRecursive(unsigned int mapPos, bool atLat, const QPoint &p);
+    WayInfo getInfoAtDataPos(qint32 datapos);
 
 
 protected:

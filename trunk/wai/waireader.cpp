@@ -22,6 +22,7 @@
 #include "waireader.h"
 #include "mapview.h"
 #include "streetrenderer.h"
+#include "wayinfo.h"
 
 WaiReader::WaiReader(const QString &kdtreefile, const QString &datafile, const QString &namesfile, int _min, int _max, MapView *parent) : mapview(parent)
 {
@@ -173,12 +174,59 @@ int WaiReader::drawObjectsInsideRecursive(quint32 currentPos, bool atLat, const 
  * @short Finds a way that passes close to that point.
  */
 WayInfo WaiReader::findWay(const QPoint &p){
-    quint32 namepos=findArea(p);
-    qDebug("%s:%d found at area %d",__FILE__,__LINE__,namepos);
+    quint32 datapos=findArea(p);
+    //qDebug("%s:%d found at area %d",__FILE__,__LINE__,datapos);
+
+
+    int precission=(mapview->window2world(QPoint(1,1))-mapview->window2world(QPoint(0,0))).x()*500;
+    //qDebug("%s:%d precission %d",__FILE__,__LINE__,precission);
+    precission*=precission;
+
+    unsigned char nsegments=mapdata[datapos]+1;
+    datapos++;
+
+    unsigned int nameArea;
+    int i,j;
+    qint32 dx,dy;
+
+    //qDebug("%s:%d %d segments",__FILE__,__LINE__,nsegments);
+
+    for (i=0;i<nsegments;i++){
+        unsigned char points=mapdata[datapos]+1;
+        nameArea=*((qint32*)(&mapdata[datapos+2]));
+        //qDebug("%s:%d name %d",__FILE__,__LINE__,nameArea);
+        qint32 *P=(qint32*)&mapdata[datapos+6];
+        for (j=0;j<points;j++){
+            dx=(*P)-p.x();
+            dy=(*(P+1))-p.y();
+            P+=2;
+            //qDebug("%s:%d point %d,%d",__FILE__,__LINE__,x,y);
+
+            if ((dx*dx)<10 && (dy*dy)<10){
+                //qDebug("%s:%d found point!!!",__FILE__,__LINE__);
+                return getInfoAtDataPos(datapos);
+            }
+        }
+        datapos+=6+8*points;
+    }
 
 
     return WayInfo();
 }
+
+/**
+ * @short Returns the info for the given area
+ */
+WayInfo WaiReader::getInfoAtDataPos(qint32 datapos){
+    WayInfo r(QString::fromUtf8(&namesdata[*((qint32*)(&mapdata[datapos+2]))]), mapdata[datapos+1]);
+
+    r.pointCount=mapdata[datapos]+1;
+
+    qDebug("%s:%d found %s with type %d" ,__FILE__,__LINE__,(char*)r.name.toUtf8().data(), r.type);
+
+    return r;
+}
+
 
 /**
  * @short Returns the kddata offset for the given point
@@ -202,7 +250,7 @@ quint32 WaiReader::findAreaRecursive(unsigned int mapPos, bool atLat, const QPoi
             more=(p.y()>=current);
         else
             more=(p.x()>=current);
-        qDebug("%s:%d now look at %d",__FILE__,__LINE__,mapPos+1+more);
+        //qDebug("%s:%d now look at %d",__FILE__,__LINE__,mapPos+1+more);
         return findAreaRecursive(kdmap[mapPos+1+more]>>2, !atLat, p);
     }
     else
