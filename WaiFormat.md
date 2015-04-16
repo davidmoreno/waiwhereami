@@ -1,0 +1,144 @@
+# WAI FILE FORMAT #
+
+This file format is slightly outdated, but the most important bits of it remain valid. It will be updated soon.
+
+The file format for Where Am I? is as follows. Some ideas are from gosmore by Nic Roets
+(http://www.mail-archive.com/routing@openstreetmap.org/msg00112.html).
+
+There are actually several files:
+
+  * wainames-XXX.bin    -- Object names, with some extra data (like type, segments, way...)
+  * waikd-XXX.bin   -- KD-tree partition, to find streets.
+  * waikdd-XXX.bin  -- KD-tree partition data, to find streets.
+
+All plain texts, althought the text size may be fixed, are in UTF8. Programs may be carefull with it.
+
+Each XXX means for a given type of objects, for example Streets, Services... It is up to the implementor user to set some data inside.
+
+All file positions refer to absolute position at the files.
+
+32 bit longitude and latitudes as it is:
+
+  1. easy to store on 32 bit computers (most).
+> 2. enough: I need 180, each  is about 111 km, so I have: 180dg x 111(km/dg) / 2^32 = 0.000004651956260204315, or 0.46 cm of precision. Enough for me and GPS (about 10 cm with Relative Kinematic Positioning)
+
+All data from http://en.wikipedia.org/wiki/Global_Positioning_System and     http://en.wikipedia.org/wiki/Latitude.
+
+## WAI Names ##
+
+
+A list of names with the following data for each record. Must be 32 bit aligned:
+
+  * 8 bits -- Street name length
+  * 8 bits -- object type
+  * 16 bits -- Point count
+  * For each point:
+    * 32 bit latitude
+    * 32 bit longitude
+  * 16 bits -- Joint counts
+  * For each Joint
+    * 16 bit point position of the cutting on this record
+    * 32 bits where does it cut on this same WAI Names file.
+    * 16 bit point position on the other record
+  * Street Name length bytes -- Street name
+
+Common object types, and rules can be seen at Appendix A.
+
+## WAI KD TREE ##
+
+
+There is one KD file for each element type. Usually users do not watch everything (petrol stations, streets, highways..) and whats more, depending on the zoom level the application may choose not to show everything. They are paired with the kdd-XXXX.bin files.
+
+At the KD tree it is stored, with a 32 bit lat/long key, the location (32bit) for a position at the names file.
+
+The KD nodes are as follows:
+
+  * 32 bits latitude or longitude (alternating, first latitude)
+  * 32 bits left (less) position at the KD data file
+  * 32 bits right (more or equal) position at the KD data file
+
+If the latitude is 0x7FFFFFFF, then the left node is the KD data file offset. Right node is left for future expansion. Leave it as 0.
+
+## WAI KD DATA ##
+
+For each leaf for the KD tree we store from 1 to 256 segments, grouped by segments (256 coords by segment):
+
+  * 8 bits -- Number of elements (byte value + 1, called NE from now on).
+  * For each NE:
+    * 8 bits:  number of points for this segment (byte value +1)
+    * 8 bits:  Object type
+    * 32 bits: Position at the names file
+    * For each position in this segment:
+      * 32 bits: latitude
+      * 32 bits: longitude
+
+Usually we store about 256 segments, but may (and should) depend on cache line size.  Several values must be tried to get the best results, on big maps.
+
+There may be points outside of this kd area, but they are there to allow to draw segments that go to an unscanned kd contiguous (or maybe remote) area.
+
+## Example (outdated) ##
+
+This example uses base 10, and separates fields with spaces. ; Normal text will be comments.
+
+It is not a really good example, as it only have 1 street and 5 points, with more points the use of KD tree and several files gets clearer.
+
+WAI Names::
+
+```
+  14              -- Street name
+  1               -- Residencial
+  5               -- Number of points
+  4344389 -397851 -- First point
+  4344371 -397863 -- Second
+  4344294 -397904 -- Third
+  4344218 -397950 -- Fourth
+  4344200 -397960 -- Fifth
+  1               -- Number of joints (just an example.. invented)
+  2 323232 1      -- At my second point, I join with 232323 1st point
+  Calle Montera\0 -- Street name
+```
+
+
+WAI KD Tree::
+
+```
+  4344294  -- Latitude cut point
+  6        -- At left go to 1
+  12       -- At right go to 2
+
+  -397960  -- Longitude cut
+  18
+  24
+  0x7FFFFFFF -- Go to data file
+  0          -- Look at 0, here are the points at this rect.
+  0
+  0x7FFFFFFF -- Go to data file
+  17
+  0
+  0x7FFFFFFF -- Go to data file
+  34
+  0
+```
+
+Cut schema::
+
+```
+   p5  |
+       |
+   p4  |
+ ------p3--------
+          p2
+              p1
+```
+
+(as can be seen the second cut is unnecessary...)
+
+Data file::
+
+```
+  1   -- 2 elements
+  0 4 -- First element, at name 0, point 4
+  0 5 -- Second el., at name 0, point 5
+  1   -- 2 element
+  0 1 -- name 0, point 1
+```
